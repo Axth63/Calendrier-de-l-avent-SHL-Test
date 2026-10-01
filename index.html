@@ -96,8 +96,10 @@ const JEUX = [
  "Qui a écrit le recueil « Les Fleurs du mal » ?",
  "Quel conte d'Andersen met en scène une enfant qui grelotte un soir de réveillon en vendant des allumettes ?"
 ];
-const test = new URLSearchParams(location.search).has("test");
-const nbJours = JEUX.length, maintenant = new Date();
+const params = new URLSearchParams(location.search), test = params.has("test");
+let maintenant = new Date(), simulee = false;
+if (params.get("date")){ const s = new Date(params.get("date") + "T12:00:00"); if (!isNaN(s)){ maintenant = s; simulee = true; } }
+const nbJours = JEUX.length;
 function etat(j){
   if (test) return "aujourdhui";
   const d = new Date(CONFIG.annee, 11, j), f = new Date(CONFIG.annee, 11, j + 1);
@@ -123,6 +125,7 @@ st.textContent = test ? "Mode test : toutes les cases sont ouvertes."
   : auj ? "Aujourd'hui, c'est la case n° " + auj + ". Bonne chance !"
   : maintenant < new Date(CONFIG.annee, 11, 1) ? "Rendez-vous le 1er décembre pour ouvrir la première case."
   : "Le calendrier est terminé. Merci à toutes et à tous d'avoir joué !";
+if (simulee && !test) st.textContent += " (date simulée : " + maintenant.toLocaleDateString("fr-FR") + ")";
 
 const f = document.getElementById("formulaire"), msg = document.getElementById("msg");
 function ouvrir(j){
