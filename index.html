@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le calendrier de l'Avent – Société des Hôtels Littéraires</title>
+<style>
+:root{--encre:#404550;--papier:#f2f0ec;--laiton:#b3883f;--vin:#7a2e3a;--texte:#2b2f38;box-sizing:border-box}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--papier);color:var(--texte);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;padding:28px 20px 24px;text-align:center;border-bottom:4px solid var(--laiton)}
+header img{width:min(340px,80%);height:auto}
+h1{font:600 clamp(1.8rem,5vw,2.8rem)/1.15 Georgia,"Iowan Old Style",serif;margin:18px 0 8px;color:var(--encre)}
+header p{max-width:60ch;margin:0 auto;color:#555b68}
+main{max-width:980px;margin:0 auto;padding:28px 16px 48px}
+#statut{text-align:center;font:italic 1.15rem Georgia,serif;color:var(--vin);margin:0 0 22px}
+#grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.case{width:100%;aspect-ratio:3/4;border:0;border-radius:3px 8px 8px 3px;color:var(--laiton);font:600 2.2rem Georgia,serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(90deg,rgba(0,0,0,.28) 0 7px,rgba(255,255,255,.08) 7px 9px,transparent 9px),var(--encre);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+li:nth-child(4n+2) .case{background-color:#4a4f5c}
+li:nth-child(4n+3) .case{background-color:#373b46}
+li:nth-child(4n) .case{background-color:#50434a}
+.case small{font:.72rem system-ui,sans-serif;color:#d9d6cf}
+.case.futur{opacity:.55;cursor:not-allowed}
+.case.passe{opacity:.4;cursor:default}
+.case.aujourdhui{outline:3px solid var(--laiton);outline-offset:3px;color:#f0d9a3}
+.case:focus-visible{outline:3px solid var(--vin);outline-offset:3px}
+dialog{border:0;border-radius:10px;padding:0;width:min(520px,94vw);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(35,38,46,.65)}
+.int{padding:26px 24px 24px}
+dialog h2{font:600 1.5rem Georgia,serif;margin:0 0 12px;color:var(--encre)}
+.q{font:1.2rem/1.5 Georgia,serif;background:var(--papier);border-left:4px solid var(--laiton);padding:12px 14px;margin:0 0 18px}
+label{display:block;font-weight:600;font-size:.92rem;margin:12px 0 4px}
+input{width:100%;font:inherit;padding:10px;border:1px solid #b9bcc4;border-radius:6px}
+.btns{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+button.act{font:600 1rem system-ui;padding:11px 20px;border-radius:6px;border:0;background:var(--vin);color:#fff;cursor:pointer}
+button.sec{background:none;color:var(--encre);border:1px solid #b9bcc4}
+#msg{margin:14px 0 0;font-weight:600}
+footer{max-width:62ch;margin:0 auto;padding:0 16px 40px;font-size:.88rem;color:#666b77;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <img src="logo.png" alt="Société des Hôtels Littéraires">
+  <h1>Le calendrier de l'Avent</h1>
+  <p>Chaque jour, une case s'ouvre avec une petite énigme. Répondez avant minuit : un tirage au sort parmi les bonnes réponses désigne le gagnant du jour.</p>
+</header>
+<main>
+  <p id="statut"></p>
+  <ol id="grille"></ol>
+</main>
+<footer>Une participation par jour et par personne. Les gagnants sont annoncés le lendemain. Les lots sont offerts par nos fournisseurs et partenaires : merci à eux.</footer>
+
+<dialog id="boite"><div class="int">
+  <h2 id="titre"></h2>
+  <p class="q" id="question"></p>
+  <form id="formulaire">
+    <label for="nom">Votre prénom et nom</label><input id="nom" required autocomplete="name">
+    <label for="hotel">Votre hôtel</label><input id="hotel" required>
+    <label for="reponse">Votre réponse</label><input id="reponse" required autocomplete="off">
+    <div class="btns"><button class="act" type="submit">Je participe</button><button class="act sec" type="button" id="fermer">Fermer</button></div>
+  </form>
+  <p id="msg" role="status"></p>
+</div></dialog>
+
+<script>
+/* ===== À RÉGLER (voir le guide) ===== */
+const CONFIG = {
+  annee: 2026,
+  formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfH0X1GfZ9lpIKq0LhMzMshWfI3A0O_0kqWgkFo7t786DUiaw/formResponse",
+  champs: { jour: "entry.978847565", nom: "entry.836249731", hotel: "entry.2034684251", reponse: "entry.1116337954" }
+};
+/* ===================================== */
+const JEUX = [
+ "Remettez ces lettres en ordre pour trouver un genre littéraire : LEVNOULE",
+ "Qui a écrit « Les Misérables » ?",
+ "Je suis plein de pages mais je n'ai pas de visage. On me tourne sans me blesser. Que suis-je ?",
+ "Complétez le titre de Saint-Exupéry : « Le Petit … »",
+ "Quel détective, créé par Conan Doyle, habite au 221B Baker Street ?",
+ "Remettez ces lettres en ordre pour retrouver l'outil de l'écrivain d'autrefois : PLUEM",
+ "Plus je travaille, plus je raccourcis. Que suis-je ?",
+ "Qui a écrit « Le Rouge et le Noir » ?",
+ "Quel animal pressé Alice suit-elle dans le terrier, dans « Alice au pays des merveilles » ?",
+ "Complétez la célèbre phrase de Proust : « Longtemps, je me suis couché de bonne … »",
+ "Remettez ces lettres en ordre (sans accent) pour trouver un art des mots : SIOEPE",
+ "Qui a écrit « Madame Bovary » ?",
+ "Quel écrivain a créé le gentleman cambrioleur Arsène Lupin ?",
+ "Qui a écrit « Le Comte de Monte-Cristo » ?",
+ "Quel écrivain anglais a imaginé Ebenezer Scrooge dans « Un chant de Noël » ?",
+ "Remettez ces lettres en ordre pour trouver un symbole de Noël : NIASP",
+ "Dans quelle ville se trouve la librairie Shakespeare and Company, qui a publié « Ulysse » de James Joyce ?",
+ "J'ai un chapeau mais pas de tête, un pied mais pas de chaussure. Que suis-je ?",
+ "Qui a écrit « L'Étranger » ?",
+ "Complétez le titre de Jules Verne : « Le Tour du monde en … jours » (donnez le nombre)",
+ "Quel héros de Cervantès attaque des moulins à vent en les prenant pour des géants ?",
+ "On me tourne, on me corne parfois, mais je reste attachée à mon livre. Que suis-je ?",
+ "Qui a écrit le recueil « Les Fleurs du mal » ?",
+ "Quel conte d'Andersen met en scène une enfant qui grelotte un soir de réveillon en vendant des allumettes ?"
+];
+const test = new URLSearchParams(location.search).has("test");
+const nbJours = JEUX.length, maintenant = new Date();
+function etat(j){
+  if (test) return "aujourdhui";
+  const d = new Date(CONFIG.annee, 11, j), f = new Date(CONFIG.annee, 11, j + 1);
+  return maintenant < d ? "futur" : maintenant >= f ? "passe" : "aujourdhui";
+}
+const cle = j => "shl_avent_" + CONFIG.annee + "_" + j;
+function lire(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function ecrire(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+
+const grille = document.getElementById("grille"), boite = document.getElementById("boite");
+let jourCourant = 0, auj = 0;
+for (let j = 1; j <= nbJours; j++){
+  const e = etat(j), li = document.createElement("li"), b = document.createElement("button");
+  b.className = "case " + e; b.type = "button";
+  b.innerHTML = j + (e === "aujourdhui" && !test ? "<small>À ouvrir</small>" : e === "passe" ? "<small>Terminée</small>" : "");
+  if (e === "aujourdhui" && !test) auj = j;
+  b.setAttribute("aria-label", "Case du " + j + " décembre" + (e === "futur" ? ", pas encore ouverte" : e === "passe" ? ", terminée" : ""));
+  b.addEventListener("click", () => { if (e === "aujourdhui") ouvrir(j); });
+  li.appendChild(b); grille.appendChild(li);
+}
+const st = document.getElementById("statut");
+st.textContent = test ? "Mode test : toutes les cases sont ouvertes."
+  : auj ? "Aujourd'hui, c'est la case n° " + auj + ". Bonne chance !"
+  : maintenant < new Date(CONFIG.annee, 11, 1) ? "Rendez-vous le 1er décembre pour ouvrir la première case."
+  : "Le calendrier est terminé. Merci à toutes et à tous d'avoir joué !";
+
+const f = document.getElementById("formulaire"), msg = document.getElementById("msg");
+function ouvrir(j){
+  jourCourant = j; msg.textContent = "";
+  document.getElementById("titre").textContent = "Case du " + j + " décembre";
+  document.getElementById("question").textContent = JEUX[j - 1];
+  document.getElementById("reponse").value = "";
+  document.getElementById("nom").value = lire("shl_avent_nom") || "";
+  document.getElementById("hotel").value = lire("shl_avent_hotel") || "";
+  const deja = !test && lire(cle(j));
+  f.hidden = !!deja;
+  if (deja) msg.textContent = "Vous avez déjà participé aujourd'hui. Réponse du tirage demain !";
+  boite.showModal();
+}
+document.getElementById("fermer").onclick = () => boite.close();
+f.addEventListener("submit", async ev => {
+  ev.preventDefault();
+  if (!CONFIG.formUrl){ msg.textContent = "Mode démo : le formulaire n'est pas encore relié, rien n'a été envoyé."; return; }
+  const d = new FormData(), c = CONFIG.champs;
+  d.append(c.jour, jourCourant);
+  d.append(c.nom, f.nom.value.trim()); d.append(c.hotel, f.hotel.value.trim()); d.append(c.reponse, f.reponse.value.trim());
+  try {
+    await fetch(CONFIG.formUrl, { method: "POST", mode: "no-cors", body: d });
+    ecrire(cle(jourCourant), "1"); ecrire("shl_avent_nom", f.nom.value.trim()); ecrire("shl_avent_hotel", f.hotel.value.trim());
+    f.hidden = true; msg.textContent = "Merci ! Votre réponse est bien enregistrée. Tirage au sort demain matin.";
+  } catch(e){ msg.textContent = "L'envoi n'a pas fonctionné. Vérifiez votre connexion et réessayez."; }
+});
+</script>
+</body>
+</html>
