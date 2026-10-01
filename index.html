@@ -5,53 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le calendrier de l'Avent – Société des Hôtels Littéraires</title>
 <style>
-:root{--encre:#404550;--papier:#f2f0ec;--laiton:#b3883f;--vin:#7a2e3a;--texte:#2b2f38;box-sizing:border-box}
+:root{--bois:#8a2e22;--bois2:#6c2118;--boisf:#4a1710;--vert:#2f5a45;--mur:#f6efe3;--or:#e3b85c;--texte:#2b2622;box-sizing:border-box}
 *,*:before,*:after{box-sizing:inherit}
-body{margin:0;background:var(--papier);color:var(--texte);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
-header{background:#fff;padding:28px 20px 24px;text-align:center;border-bottom:4px solid var(--laiton)}
-header img{width:min(340px,80%);height:auto}
-h1{font:600 clamp(1.8rem,5vw,2.8rem)/1.15 Georgia,"Iowan Old Style",serif;margin:18px 0 8px;color:var(--encre)}
-header p{max-width:60ch;margin:0 auto;color:#555b68}
-main{max-width:980px;margin:0 auto;padding:28px 16px 48px}
-#statut{text-align:center;font:italic 1.15rem Georgia,serif;color:var(--vin);margin:0 0 22px}
-#grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px;list-style:none;margin:0;padding:0}
-.case{width:100%;aspect-ratio:3/4;border:0;border-radius:3px 8px 8px 3px;color:var(--laiton);font:600 2.2rem Georgia,serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(90deg,rgba(0,0,0,.28) 0 7px,rgba(255,255,255,.08) 7px 9px,transparent 9px),var(--encre);box-shadow:0 2px 0 rgba(0,0,0,.25)}
-li:nth-child(4n+2) .case{background-color:#4a4f5c}
-li:nth-child(4n+3) .case{background-color:#373b46}
-li:nth-child(4n) .case{background-color:#50434a}
-.case small{font:.72rem system-ui,sans-serif;color:#d9d6cf}
-.case.futur{opacity:.55;cursor:not-allowed}
-.case.passe{opacity:.4;cursor:default}
-.case.aujourdhui{outline:3px solid var(--laiton);outline-offset:3px;color:#f0d9a3}
-.case:focus-visible{outline:3px solid var(--vin);outline-offset:3px}
-dialog{border:0;border-radius:10px;padding:0;width:min(520px,94vw);box-shadow:0 12px 40px rgba(0,0,0,.35)}
-dialog::backdrop{background:rgba(35,38,46,.65)}
-.int{padding:26px 24px 24px}
-dialog h2{font:600 1.5rem Georgia,serif;margin:0 0 12px;color:var(--encre)}
-.q{font:1.2rem/1.5 Georgia,serif;background:var(--papier);border-left:4px solid var(--laiton);padding:12px 14px;margin:0 0 18px}
+body{margin:0;background:var(--mur);color:var(--texte);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.toile{height:18px;background:repeating-linear-gradient(90deg,#9b2d22 0 22px,#fff 22px 30px,#2f5a45 30px 38px,#fff 38px 46px)}
+header{background:#fff;text-align:center;padding:24px 20px 18px}
+header img{width:min(320px,78%);height:auto}
+h1{font:700 clamp(1.8rem,5vw,2.8rem)/1.15 Georgia,"Iowan Old Style",serif;margin:14px 0 8px;color:var(--bois2)}
+header p{max-width:60ch;margin:0 auto;color:#5b524b}
+.poutre{height:18px;background:repeating-linear-gradient(135deg,transparent 0 16px,rgba(255,255,255,.1) 16px 18px),var(--bois2);box-shadow:0 3px 0 var(--boisf)}
+.guirlande{height:46px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='46' viewBox='0 0 150 46'%3E%3Cpath d='M0%2C4 Q75%2C34 150%2C4' stroke='%232f5a45' stroke-width='3' fill='none'/%3E%3Ccircle cx='37' cy='22' r='6' fill='%23c0392b'/%3E%3Ccircle cx='75' cy='26' r='6' fill='%23e3b85c'/%3E%3Ccircle cx='113' cy='22' r='6' fill='%233d7a5c'/%3E%3C/svg%3E") repeat-x center top/150px 46px}
+main{max-width:980px;margin:0 auto;padding:6px 16px 40px}
+.deco{text-align:center;font-size:1.6rem;letter-spacing:.5em;margin:0 0 6px}
+#statut{text-align:center;font:italic 1.2rem Georgia,serif;color:var(--bois);margin:0 0 24px}
+#grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:18px 14px;list-style:none;margin:0;padding:0}
+.case{width:100%;aspect-ratio:3/4;border:0;border-radius:7px 7px 2px 2px;color:#f6dfa4;font:700 2.1rem Georgia,serif;cursor:pointer;position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.1) 0 2px,transparent 2px 9px),linear-gradient(180deg,var(--bois),var(--bois2));box-shadow:inset 0 0 0 5px var(--boisf),inset 0 0 0 7px rgba(255,255,255,.12),0 5px 7px rgba(60,20,10,.35);text-shadow:0 2px 2px rgba(0,0,0,.45)}
+.case:before{content:"";position:absolute;inset:15px;z-index:-1;border:2px solid rgba(0,0,0,.28);border-radius:3px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.case:after{content:"";position:absolute;right:11px;top:54%;width:9px;height:9px;border-radius:50%;background:var(--or);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+li:nth-child(3n+2) .case{filter:hue-rotate(-6deg) brightness(.95)}
+li:nth-child(3n) .case{background-color:var(--vert);background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.1) 0 2px,transparent 2px 9px),linear-gradient(180deg,#386b54,#264a39)}
+.case small{font:.72rem system-ui,sans-serif;color:#f1e6cf;text-shadow:none}
+.case.futur{filter:saturate(.45) brightness(.8);opacity:.7;cursor:not-allowed}
+.case.passe{filter:grayscale(.6) brightness(.85);opacity:.55;cursor:default}
+.case.aujourdhui{box-shadow:inset 0 0 0 5px var(--boisf),0 0 0 3px var(--or),0 0 20px 4px rgba(227,184,92,.65);color:#fff1c4}
+.case:focus-visible{outline:3px solid #1b4fa0;outline-offset:4px}
+dialog{border:0;border-top:16px solid var(--bois2);border-radius:6px;padding:0;width:min(540px,94vw);max-height:92vh;background:#fffaf0;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(45,20,14,.7)}
+.int{padding:22px 24px 24px}
+dialog h2{font:700 1.5rem Georgia,serif;margin:0 0 12px;color:var(--bois2)}
+#media img,#media video{width:100%;height:auto;max-height:46vh;object-fit:cover;border-radius:6px;display:block}
+#media iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:6px}
+#media{margin-bottom:14px}.leg{font-size:.85rem;color:#6b625a;margin:6px 0 0;font-style:italic}
+.q{font:1.2rem/1.5 Georgia,serif;background:#f3e8d3;border-left:4px solid var(--or);padding:12px 14px;margin:0 0 18px}
 label{display:block;font-weight:600;font-size:.92rem;margin:12px 0 4px}
-input{width:100%;font:inherit;padding:10px;border:1px solid #b9bcc4;border-radius:6px}
+input{width:100%;font:inherit;padding:10px;border:1px solid #c4b8a6;border-radius:6px;background:#fff}
 .btns{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-button.act{font:600 1rem system-ui;padding:11px 20px;border-radius:6px;border:0;background:var(--vin);color:#fff;cursor:pointer}
-button.sec{background:none;color:var(--encre);border:1px solid #b9bcc4}
+button.act{font:600 1rem system-ui;padding:11px 20px;border-radius:6px;border:0;background:var(--bois);color:#fff;cursor:pointer}
+button.sec{background:none;color:var(--bois2);border:1px solid #c4b8a6}
 #msg{margin:14px 0 0;font-weight:600}
-footer{max-width:62ch;margin:0 auto;padding:0 16px 40px;font-size:.88rem;color:#666b77;text-align:center}
+footer{max-width:62ch;margin:0 auto;padding:0 16px 40px;font-size:.88rem;color:#6b625a;text-align:center}
 </style>
 </head>
 <body>
+<div class="toile"></div>
 <header>
   <img src="logo.png" alt="Société des Hôtels Littéraires">
   <h1>Le calendrier de l'Avent</h1>
   <p>Chaque jour, une case s'ouvre avec une petite énigme. Répondez avant minuit : un tirage au sort parmi les bonnes réponses désigne le gagnant du jour.</p>
 </header>
+<div class="poutre"></div><div class="guirlande" aria-hidden="true"></div>
 <main>
+  <div class="deco" aria-hidden="true">🎄 🎁 ⭐ 🎁 🎄</div>
   <p id="statut"></p>
   <ol id="grille"></ol>
 </main>
-<footer>Une participation par jour et par personne. Les gagnants sont annoncés le lendemain. Les lots sont offerts par nos fournisseurs et partenaires : merci à eux.</footer>
+<footer><div class="deco" aria-hidden="true">🎁 🎄 🎁</div>Une participation par jour et par personne. Les gagnants sont annoncés le lendemain. Les lots sont offerts par nos fournisseurs et partenaires : merci à eux.</footer>
 
 <dialog id="boite"><div class="int">
   <h2 id="titre"></h2>
+  <div id="media"></div>
   <p class="q" id="question"></p>
   <form id="formulaire">
     <label for="nom">Votre prénom et nom</label><input id="nom" required autocomplete="name">
@@ -96,6 +108,22 @@ const JEUX = [
  "Qui a écrit le recueil « Les Fleurs du mal » ?",
  "Quel conte d'Andersen met en scène une enfant qui grelotte un soir de réveillon en vendant des allumettes ?"
 ];
+/* Photos et vidéos : décommentez et adaptez les lignes pour les jours choisis */
+const MEDIAS = {
+  // 5:  { type: "image",   src: "medias/hotel-brive-1.jpg", legende: "Notre nouvel hôtel à Brive-la-Gaillarde" },
+  // 12: { type: "video",   src: "medias/hotel-brive.mp4",   legende: "Visite de l'hôtel" },
+  // 18: { type: "youtube", id: "IDENTIFIANT_YOUTUBE",       legende: "Dans les coulisses de l'hôtel" }
+};
+function afficherMedia(j){
+  const z = document.getElementById("media"); z.innerHTML = "";
+  const m = MEDIAS[j]; if (!m) return; let el;
+  if (m.type === "image"){ el = document.createElement("img"); el.src = m.src; el.alt = m.legende || ""; }
+  else if (m.type === "video"){ el = document.createElement("video"); el.src = m.src; el.controls = true; el.preload = "metadata"; el.playsInline = true; }
+  else if (m.type === "youtube"){ el = document.createElement("iframe"); el.src = "https://www.youtube-nocookie.com/embed/" + m.id; el.allowFullscreen = true; el.title = m.legende || "Vidéo"; }
+  else return;
+  z.appendChild(el);
+  if (m.legende){ const c = document.createElement("p"); c.className = "leg"; c.textContent = m.legende; z.appendChild(c); }
+}
 const params = new URLSearchParams(location.search), test = params.has("test");
 let maintenant = new Date(), simulee = false;
 if (params.get("date")){ const s = new Date(params.get("date") + "T12:00:00"); if (!isNaN(s)){ maintenant = s; simulee = true; } }
@@ -132,6 +160,7 @@ function ouvrir(j){
   jourCourant = j; msg.textContent = "";
   document.getElementById("titre").textContent = "Case du " + j + " décembre";
   document.getElementById("question").textContent = JEUX[j - 1];
+  afficherMedia(j);
   document.getElementById("reponse").value = "";
   document.getElementById("nom").value = lire("shl_avent_nom") || "";
   document.getElementById("hotel").value = lire("shl_avent_hotel") || "";
@@ -141,6 +170,7 @@ function ouvrir(j){
   boite.showModal();
 }
 document.getElementById("fermer").onclick = () => boite.close();
+boite.addEventListener("close", () => { document.getElementById("media").innerHTML = ""; });
 f.addEventListener("submit", async ev => {
   ev.preventDefault();
   if (!CONFIG.formUrl){ msg.textContent = "Mode démo : le formulaire n'est pas encore relié, rien n'a été envoyé."; return; }
