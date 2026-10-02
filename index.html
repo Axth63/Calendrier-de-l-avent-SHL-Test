@@ -63,6 +63,36 @@ header,.toile,.poutre,main,footer,.village,.sol{position:relative;z-index:1}
 .village{display:block;width:100%;height:auto;margin-top:12px}
 .son{position:fixed;right:12px;bottom:12px;z-index:9;border:0;border-radius:999px;padding:10px 16px;background:#f6dc92;color:#4a1710;font:600 .9rem system-ui;box-shadow:0 4px 12px rgba(0,0,0,.4);cursor:pointer}
 .hier{max-width:640px;margin:0 auto 22px;padding:12px 16px;border-left:4px solid var(--or);border-radius:8px;background:rgba(255,255,255,.12);color:#fff;text-align:center;font-size:.98rem}
+
+/* ===== Aquarelle : papier, couleurs des illustrations SHL ; portes de marché peintes ===== */
+:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .32 0 0 0 0 .22 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='white' filter='url%28%23n%29'/%3E%3C/svg%3E")}
+body{background:var(--grain),linear-gradient(#f9f5ec,#f3ebdb)}
+body:before{height:1000px;animation:none;background:radial-gradient(ellipse 40% 240px at 85% 130px,rgba(159,184,207,.55),transparent 70%),radial-gradient(ellipse 36% 220px at 12% 160px,rgba(234,181,173,.5),transparent 70%),radial-gradient(ellipse 45% 250px at 50% 540px,rgba(217,183,126,.4),transparent 70%),radial-gradient(ellipse 35% 220px at 14% 780px,rgba(143,174,148,.4),transparent 70%)}
+.toile{height:12px;background:repeating-linear-gradient(135deg,#c9776a 0 12px,#fffaf0 12px 24px,#4f7a86 24px 36px,#fffaf0 36px 48px)}
+.poutre{background:repeating-linear-gradient(135deg,transparent 0 16px,rgba(255,255,255,.1) 16px 18px),#6a4632;box-shadow:0 3px 0 #4a2f20}
+header{background:transparent;padding:22px 20px 10px}
+header img:not(.illus){mix-blend-mode:multiply}
+h1{color:#35596a;font-style:italic}
+.illus{display:block;width:auto;max-width:100%;max-height:340px;margin:14px auto 0;border:0;box-shadow:none;mix-blend-mode:multiply;-webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 62%,transparent 100%)}
+.illus[hidden]{display:none}
+.deco{text-shadow:none}
+#statut{color:#a44f42;text-shadow:none}
+.hier{background:rgba(255,255,255,.6);color:var(--texte);border-left-color:#c9776a}
+.flocon{color:#a9c1d4}
+footer{color:#6b5d4f}
+.sol{background:linear-gradient(#f4f8fb,#fff);box-shadow:none;border-top:2px solid rgba(160,190,210,.5)}
+li .case{--txt:#fff4dc;color:var(--txt);text-shadow:0 1px 2px rgba(40,25,15,.5);background:var(--grain),linear-gradient(rgba(0,0,0,.25),transparent) 0 20px/100% 7px no-repeat,repeating-linear-gradient(90deg,var(--tente) 0 14px,#f7f1e6 14px 28px) 0 0/100% 20px no-repeat,repeating-linear-gradient(90deg,rgba(60,40,30,.09) 0 1px,transparent 1px 9px),radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent 60%),linear-gradient(180deg,var(--b1),var(--b2));box-shadow:inset 0 0 0 4px #6a4632,inset 0 0 0 5px rgba(255,255,255,.22),inset 0 0 24px rgba(0,0,0,.14),0 5px 9px rgba(70,50,30,.32)}
+li:nth-child(6n+1) .case{--b1:#4f7a86;--b2:#35596a;--tente:#c9776a;--txt:#fff4dc}
+li:nth-child(6n+2) .case{--b1:#b4685a;--b2:#8f4a40;--tente:#4f7a86;--txt:#fff4dc}
+li:nth-child(6n+3) .case{--b1:#8a5e44;--b2:#6a4632;--tente:#c9776a;--txt:#fff4dc}
+li:nth-child(6n+4) .case{--b1:#86a8c4;--b2:#6089ab;--tente:#d9b77e;--txt:#2d1c12}
+li:nth-child(6n+5) .case{--b1:#9ab59d;--b2:#6f9578;--tente:#c9776a;--txt:#2d1c12}
+li:nth-child(6n) .case{--b1:#dcb56f;--b2:#b98d4a;--tente:#4f7a86;--txt:#2d1c12}
+li .case small{color:inherit;opacity:.85}
+li .case.aujourdhui{color:var(--txt)}
+.cartes{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:980px;margin:26px auto 4px;padding:0 14px}
+.cartes img{height:140px;width:auto;max-width:46vw;object-fit:cover;border:6px solid #fffdf7;box-shadow:0 3px 9px rgba(70,50,30,.32);transform:rotate(-1.4deg)}
+.cartes img:nth-child(even){transform:rotate(1.2deg)}
 </style>
 </head>
 <body>
@@ -71,6 +101,7 @@ header,.toile,.poutre,main,footer,.village,.sol{position:relative;z-index:1}
   <img src="logo.png" alt="Société des Hôtels Littéraires">
   <h1>Le marché de Noël de l'Avent</h1>
   <p>Bienvenue au marché de Noël ! Chaque jour, un nouveau chalet ouvre ses portes avec une petite énigme. Répondez avant minuit : un tirage au sort parmi les bonnes réponses désigne le gagnant du jour.</p>
+  <img id="illus" class="illus" hidden alt="Illustration d'un hôtel de la Société des Hôtels Littéraires">
 </header>
 <div class="poutre"></div><div class="guirlande" aria-hidden="true"></div>
 <main>
@@ -78,13 +109,15 @@ header,.toile,.poutre,main,footer,.village,.sol{position:relative;z-index:1}
   <p id="statut"></p>
   <div id="hier" class="hier" hidden></div>
   <ol id="grille"></ol>
+  <div class="cartes" aria-hidden="true"><img src="medias/bibliotheque.webp" alt="" loading="lazy"><img src="medias/facade-sand.jpg" alt="" loading="lazy"><img src="medias/statues.webp" alt="" loading="lazy"><img src="medias/couple.webp" alt="" loading="lazy"></div>
 </main>
 <footer>Une participation par jour et par personne. Les gagnants sont annoncés le lendemain. Les lots sont offerts par nos fournisseurs et partenaires : merci à eux.</footer>
 <div class="guirlande" aria-hidden="true"></div>
 <svg class="village" viewBox="0 0 600 110" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><defs>
-<g id="m"><rect x="10" y="60" width="70" height="50" fill="#3a2620"/><polygon points="0,62 45,26 90,62" fill="#3a2620"/><polygon points="6,59 45,29 84,59 80,63 45,36 10,63" fill="#fff"/><path d="M10,86H80M45,64V110" stroke="#8a2e22" stroke-width="3"/><rect x="20" y="70" width="14" height="14" fill="#ffcf5a"/><rect x="56" y="70" width="14" height="14" fill="#ffcf5a"/><rect x="20" y="92" width="14" height="14" fill="#ffcf5a"/></g>
-<g id="a"><polygon points="0,0 14,34 -14,34" fill="#1d4d3a"/><polygon points="0,16 18,56 -18,56" fill="#1d4d3a"/><rect x="-3" y="56" width="6" height="8" fill="#3a2620"/></g></defs>
-<use href="#m" transform="translate(5,0)"/><use href="#a" transform="translate(118,46)"/><use href="#m" transform="translate(135,11) scale(.9)"/><use href="#m" transform="translate(235,0)"/><use href="#a" transform="translate(350,46)"/><use href="#m" transform="translate(380,18) scale(.84)"/><use href="#m" transform="translate(470,6) scale(.95)"/><use href="#a" transform="translate(578,46)"/></svg>
+<filter id="aq"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+<g id="m"><rect x="10" y="60" width="70" height="50" style="fill:var(--w,#e6c48f)"/><polygon points="0,62 45,26 90,62" fill="#9a5a45"/><polygon points="6,59 45,29 84,59 80,63 45,36 10,63" fill="#fff"/><path d="M10,86H80M45,64V110" stroke="#a03a2c" stroke-width="3"/><rect x="20" y="70" width="14" height="14" fill="#ffd978"/><rect x="56" y="70" width="14" height="14" fill="#ffd978"/><rect x="20" y="92" width="14" height="14" fill="#ffd978"/></g>
+<g id="a"><polygon points="0,0 14,34 -14,34" fill="#7fa88a"/><polygon points="0,16 18,56 -18,56" fill="#6e9a7c"/><rect x="-3" y="56" width="6" height="8" fill="#8b6a4f"/></g></defs>
+<g filter="url(#aq)"><use href="#m" style="--w:#e3b2a6" transform="translate(5,0)"/><use href="#m" style="--w:#e6c48f" transform="translate(135,11) scale(.9)"/><use href="#m" style="--w:#b8cdb0" transform="translate(235,0)"/><use href="#m" style="--w:#b7cadb" transform="translate(380,18) scale(.84)"/><use href="#m" style="--w:#e3b2a6" transform="translate(470,6) scale(.95)"/><use href="#a" transform="translate(118,46)"/><use href="#a" transform="translate(350,46)"/><use href="#a" transform="translate(578,46)"/></g></svg>
 <div class="sol" aria-hidden="true">🌲 🎁 🦌 🛷 🎅 ⛄ 🥨 🎁 🌲</div>
 
 <dialog id="boite"><div class="int">
@@ -95,9 +128,10 @@ header,.toile,.poutre,main,footer,.village,.sol{position:relative;z-index:1}
     <label for="nom">Votre prénom et nom</label><input id="nom" required autocomplete="name">
     <label for="hotel">Votre hôtel</label><input id="hotel" required>
     <label for="reponse">Votre réponse</label><input id="reponse" required autocomplete="off">
-    <div class="btns"><button class="act" type="submit">Je participe</button><button class="act sec" type="button" id="fermer">Fermer</button></div>
+    <div class="btns"><button class="act" type="submit">Je participe</button></div>
   </form>
   <p id="msg" role="status"></p>
+  <div class="btns"><button class="act sec" type="button" id="fermer">Fermer</button></div>
 </div></dialog>
 
 <audio id="musique" src="musique.mp3" loop preload="metadata"></audio>
@@ -107,7 +141,8 @@ header,.toile,.poutre,main,footer,.village,.sol{position:relative;z-index:1}
 const CONFIG = {
   annee: 2026,
   mois: 12,                            // 12 = décembre
-  publicUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQvrOuvR8e4lwzrZLI8mBJg7xFFuQb7PI-L6pU6U3Wvaw8EcuXa3eSq940i7NLr7e--QPQHPCHn2ual/pub?gid=2134938437&single=true&output=csv",                       // adresse de l'onglet « Public » publié en CSV (voir le guide)
+  publicUrl: "",                       // adresse de l'onglet « Public » publié en CSV (voir le guide)
+  illustration: "medias/facade-flaubert.jpg",                    // illustration à l\'aquarelle d\'un hôtel, en haut de page, ex. "medias/facade.jpg"
   formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfH0X1GfZ9lpIKq0LhMzMshWfI3A0O_0kqWgkFo7t786DUiaw/formResponse",
   champs: { jour: "entry.978847565", nom: "entry.836249731", hotel: "entry.2034684251", reponse: "entry.1116337954" }
 };
@@ -209,14 +244,14 @@ function lireCsv(t){
 function majHier(){
   const z = document.getElementById("hier"), d = PUBLIC[auj - 1];
   if (!auj || !d){ z.hidden = true; return; }
-  z.textContent = "Hier, case n° " + (auj - 1) + " : « " + JEUX[auj - 2] + " » Réponse : " + d.reponse + "." + (d.gagnant ? " Bravo à " + d.gagnant + " !" : "");
+  z.textContent = "Hier, case n° " + (auj - 1) + " : « " + JEUX[auj - 2] + " » Réponse : " + d.reponse + "." + (d.gagnant ? " Bravo à " + d.gagnant + " !" + (d.lot ? " Lot remporté : " + d.lot + "." : "") : "");
   z.hidden = false;
 }
 async function chargerPublic(){
   if (!CONFIG.publicUrl) return;
   try {
     const r = await fetch(CONFIG.publicUrl + (CONFIG.publicUrl.indexOf("?") < 0 ? "?" : "&") + "t=" + Date.now());
-    lireCsv(await r.text()).forEach(l => { const j = Number(l[0]); if (j) PUBLIC[j] = { reponse: (l[1] || "").trim(), gagnant: (l[2] || "").trim() }; });
+    lireCsv(await r.text()).forEach(l => { const j = Number(l[0]); if (j) PUBLIC[j] = { reponse: (l[1] || "").trim(), gagnant: (l[2] || "").trim(), lot: (l[3] || "").trim() }; });
     majHier();
   } catch(e){}
 }
@@ -227,7 +262,7 @@ function ouvrirPasse(j){
   afficherMedia(j);
   f.hidden = true;
   const d = PUBLIC[j];
-  msg.textContent = d ? "Réponse : " + d.reponse + (d.gagnant ? " · Gagnant(e) : " + d.gagnant : "") : "La réponse et le gagnant seront dévoilés après le tirage.";
+  msg.textContent = d ? "Réponse : " + d.reponse + (d.gagnant ? " · Gagnant(e) : " + d.gagnant + (d.lot ? " · Lot : " + d.lot : "") : "") : "La réponse et le gagnant seront dévoilés après le tirage.";
   boite.showModal();
 }
 chargerPublic();
@@ -246,6 +281,7 @@ function ouvrir(j){
   boite.showModal();
 }
 document.getElementById("fermer").onclick = () => boite.close();
+boite.addEventListener("click", ev => { if (ev.target === boite) boite.close(); });
 boite.addEventListener("close", () => { document.getElementById("media").innerHTML = ""; });
 f.addEventListener("submit", async ev => {
   ev.preventDefault();
@@ -259,6 +295,7 @@ f.addEventListener("submit", async ev => {
     f.hidden = true; msg.textContent = "Merci ! Votre réponse est bien enregistrée. Tirage au sort demain matin.";
   } catch(e){ msg.textContent = "L'envoi n'a pas fonctionné. Vérifiez votre connexion et réessayez."; }
 });
+if (CONFIG.illustration){ const im = document.getElementById("illus"); im.src = CONFIG.illustration; im.hidden = false; }
 /* Musique : les navigateurs interdisent le son automatique ; elle démarre au premier clic ou toucher sur la page */
 const mus = document.getElementById("musique"), son = document.getElementById("son");
 mus.volume = 0.35;
